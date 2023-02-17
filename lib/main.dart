@@ -160,7 +160,9 @@ class HomePage extends StatelessWidget {
       children: const <Widget>[
         HeadingText('Azan Pakistan'),
         ContentText(
-            'Azan Pakistan is a party heading towards the betterment of Pakistan. We have a motive to make Pakistan a welfare state in which people will live in an atmosphere of brotherhood and harmony.')
+          'Azan Pakistan is a party heading towards the betterment of Pakistan. We have a motive to make Pakistan a welfare state in which people will live in an atmosphere of brotherhood and harmony.',
+          padding: EdgeInsets.all(8),
+        )
       ],
     );
   }
@@ -176,7 +178,9 @@ class WhyPage extends StatelessWidget {
       children: const <Widget>[
         HeadingText('Why Azan Pakistan?'),
         ContentText(
-            'Azan Pakistan has a motive to make Pakistan a welfare state in which people will live in an atmosphere of brotherhood and harmony To achieve this goal we will do everything in our strength, we will teach our members and citizens of Pakistan how to fight for their basic human rights.')
+          'Azan Pakistan has a motive to make Pakistan a welfare state in which people will live in an atmosphere of brotherhood and harmony To achieve this goal we will do everything in our strength, we will teach our members and citizens of Pakistan how to fight for their basic human rights.',
+          padding: EdgeInsets.all(8),
+        )
       ],
     );
   }
@@ -190,11 +194,17 @@ class ManifestoPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        const SizedBox(
+          height: 12,
+        ),
         const HeadingText('Our Manifesto'),
+        const SizedBox(
+          height: 12,
+        ),
         Flexible(
           child: GridView(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
+                crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
             physics: const NeverScrollableScrollPhysics(),
             children: const <Widget>[
               ManifestoGridItem('Economic Growth',
@@ -236,18 +246,27 @@ class HeadingText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(heading);
+    return Text(
+      heading,
+      style: const TextStyle(
+          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+    );
   }
 }
 
 class ContentText extends StatelessWidget {
   final String content;
+  final EdgeInsets padding;
 
-  const ContentText(this.content, {super.key});
+  const ContentText(this.content,
+      {this.padding = const EdgeInsets.all(0), super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text(content);
+    return Padding(
+      padding: padding,
+      child: Text(content),
+    );
   }
 }
 
@@ -260,7 +279,16 @@ class ManifestoGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[HeadingText(title), Text(description)],
+      children: <Widget>[
+        HeadingText(title),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+          ),
+        )
+      ],
     );
   }
 }
